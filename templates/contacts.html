@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block css %}
+  <link href="{% static "contacts.css" %}" rel="stylesheet">
+{% endblock %}
+{% block page_content %}
+  <h3>Contacts</h3>
+  <div class="contact">
+    <h4>Phone</h4>
+    <h4>{{ contacts.phone }}</h4>
+  </div>
+  <div class="contact">
+    <h4>Email</h4>
+    <h4>
+      {{ contacts.email }}</h44>
+    </div>
+    <div class="contact">
+      <h4>Address</h4>
+      <h4>{{ contacts.address }}</h4>
+    </div>
+  {% endblock %}

@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+{% load static %}
+<link href="{% static "create.css" %}" rel="stylesheet">
+{% block page_content %}
+  <main class="create">
+    <form method="post">
+      {% csrf_token %}
+      <div>Title: {{ form.title }}</div>
+      <div>
+        Text:
+        <br>
+        {{ form.body }}
+      </div>
+      <div>
+        Categories:
+        <br>
+        {{ form.categories }}
+      </div>
+      <button type="submit">Create</button>
+    </form>
+  </main>
+{% endblock %}

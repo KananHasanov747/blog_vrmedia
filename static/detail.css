@@ -1,0 +1,48 @@
+.detail__likes {
+  display: flex;
+  justify-content: center;
+}
+.detail__likes-icon {
+  width: 20px;
+}
+
+.detail__categories {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.detail__category {
+  margin: 0.125rem;
+}
+.detail__category-name {
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  padding: 0.125rem;
+  font-size: 12px;
+  color: black;
+}
+
+.detail__container {
+  width: 500px;
+}
+
+.detail__comments h3 {
+  margin: 1rem 0;
+}
+.detail__comment {
+  margin: 10px 0;
+  padding: 0.25rem;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+}
+
+.detail__stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.detail__body {
+  margin: 0.5rem 0;
+}

@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block css %}
+  <link href="{% static "about.css" %}" rel="stylesheet">
+{% endblock %}
+{% block page_content %}
+  <h3>About</h3>
+  <p>{{ about.content }}</p>
+{% endblock %}

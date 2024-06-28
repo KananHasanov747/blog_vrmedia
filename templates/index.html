@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="{% static "style.css" %}" rel="stylesheet">
+    {% block css %}{% endblock %}
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar__left">
+        <h2 class="navbar__name">Blog</h2>
+        <div class="navbar__menu">
+          <a href="{% url "app:posts" %}">Home</a>
+        </div>
+      </div>
+      <div class="navbar__right">
+        <div class="navbar__menu">
+          <a href="{% url "app:blog_about" %}">About</a>
+        </div>
+        <div class="navbar__menu">
+          <a href="{% url "app:blog_contacts" %}">Contacts</a>
+        </div>
+        {% if not user.is_authenticated %}
+          <div class="navbar__menu">
+            <a href="{% url "app:login" %}">Login</a>
+          </div>
+        {% else %}
+          <div class="navbar__menu">
+            <form id="logout" method="post" action="{% url "app:logout" %}">
+              {% csrf_token %}
+              <button type="submit">Logout</button>
+            </form>
+          </div>
+        {% endif %}
+      </div>
+    </nav>
+    <div class="container">
+      <div class="container-width">
+        <header class="title">
+          {% block page_title %}{% endblock %}
+        </header>
+        <main>
+          {% block page_content %}{% endblock %}
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

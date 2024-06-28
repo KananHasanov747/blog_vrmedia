@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% load static %}
+{% block css %}
+  <link href="{% static "auth.css" %}" rel="stylesheet">
+{% endblock %}
+{% block page_content %}
+  {% if exists %}<p>This login does exist. Please choose another name.</p>{% endif %}
+  <form method="post" action="{% url 'app:blog_signup' %}">
+    {% csrf_token %}
+    <div class="input-field">
+      {{ form.username }}
+      <label for="id_username">Login</label>
+    </div>
+    <div class="input-field">
+      {{ form.password1 }}
+      <label for="id_password">Password</label>
+    </div>
+    <div class="input-field">
+      {{ form.password2 }}
+      <label for="id_password">Confirm password</label>
+    </div>
+    <button class="btn" type="submit">Sign Up</button>
+  </form>
+{% endblock %}

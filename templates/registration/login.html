@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% load static %}
+{% block css %}
+  <link href="{% static "auth.css" %}" rel="stylesheet">
+{% endblock %}
+{% block page_content %}
+  {% if form.errors %}<p>Your username and password didn't match. Please try again.</p>{% endif %}
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>
+        Your account doesn't have access to this page. To proceed, please login with
+        an account that has access.
+      </p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+  <form method="post" action="{% url 'app:login' %}">
+    {% csrf_token %}
+    <div class="input-field">
+      {{ form.username }}
+      <label for="id_username">Login</label>
+    </div>
+    <div class="input-field">
+      {{ form.password }}
+      <label for="id_password">Password</label>
+    </div>
+    <div class="footer">
+      <button class="btn" type="submit">login</button>
+      <a href="{% url "app:blog_signup" %}"><u>Sign Up</u></a>
+    </div>
+  </form>
+{% endblock %}

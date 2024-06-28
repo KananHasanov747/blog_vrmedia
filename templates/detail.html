@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+{% load static %}
+{% block css %}
+  <link href="{% static "detail.css" %}" rel="stylesheet">
+{% endblock css %}
+{% block page_title %}
+  <h2>{{ post.title }}</h2>
+{% endblock page_title %}
+{% block page_content %}
+  <main class="detail">
+    <div class="detail__container">
+      <div class="detail__content">
+        <div class="detail__stats">
+          <div>{{ post.created_on.date }}</div>
+          <div class="detail__categories">
+            {% for category in post.categories.all %}
+              <div class="detail__category">
+                <a class="detail__category-name"
+                   href="{% url 'app:blog_category' category.name %}">{{ category.name }}</a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="detail__body">
+          <p>{{ post.body | linebreaks }}</p>
+        </div>
+      </div>
+      <form action="{% url "app:blog_like" post.pk %}" method="post">
+        {% csrf_token %}
+        <button class="detail__likes" type="submit" name="like">
+          <img class="detail__likes-icon" src="{% static "like.svg" %}" alt="like">
+          <span>{{ post.likes }}</span>
+        </button>
+      </form>
+      <div class="detail__comments">
+        <h3>Leave a comment:</h3>
+        {% if user.is_authenticated %}
+          <form method="post">
+            {% csrf_token %}
+            <div>{{ form.body }}</div>
+            <button class="btn" type="submit">Submit</button>
+          </form>
+        {% else %}
+          <p>Sorry, but you need to login in order to comment</p>
+          <button type="button">
+            <a href="{% url "app:login" %}">Login</a>
+          </button>
+        {% endif %}
+        <h3>Comments:</h3>
+        {% for comment in comments %}
+          <div class="detail__comment">
+            <div class="detail__stats">
+              <p>On {{ comment.created_on.date }}</p>
+              <p>
+                <b>{{ comment.author }}</b> wrote:
+              </p>
+            </div>
+            <div class="detail__body">
+              <p>{{ comment.body | linebreaks }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+{% endblock page_content %}
